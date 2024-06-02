@@ -1,6 +1,3 @@
-> DO NOT SEND ANY SECURITY FIX HERE. Please read "Security Reporting" section
-> on README.
-
 **What kind of change does this PR introduce?** (check at least one)
 
 - [ ] Bugfix
@@ -20,4 +17,4 @@ If yes, please describe the impact and migration path for existing applications:
 
 ---
 
-- [ ] You consent that the copyright of your pull request source code belongs to Authlib's author.
+- [ ] You consent that the copyright of your pull request source code belongs to sublime-text-plugin-pip's author.

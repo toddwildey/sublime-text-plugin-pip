@@ -1,20 +1,18 @@
 [project]
-name = "Authlib"
-description = "The ultimate Python library in building OAuth and OpenID Connect servers and clients."
-authors = [{name = "Hsiaoming Yang", email="me@lepture.com"}]
-dependencies = [
-  "cryptography",
-]
+name = "sublime-text-plugin-pip"
+description = "A Sublime Text plugin available in Package Control that enables other Sublime Text plugins to install Python modules with PIP in the Package Control ecosystem."
+authors = [{name = "Todd Wildey", email="toddwildey@gmail.com"}]
+dependencies = []
 license = {text = "BSD-3-Clause"}
 requires-python = ">=3.8"
 dynamic = ["version"]
-readme = "README.rst"
+readme = "README.md"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Environment :: Web Environment",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: BSD License",
+  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
@@ -25,27 +23,21 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
-  "Topic :: Security",
-  "Topic :: Security :: Cryptography",
-  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-  "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
 ]
 
 [project.urls]
-Documentation = "https://docs.authlib.org/"
-Purchase = "https://authlib.org/plans"
-Issues = "https://github.com/lepture/authlib/issues"
-Source = "https://github.com/lepture/authlib"
-Donate = "https://github.com/sponsors/lepture"
-Blog = "https://blog.authlib.org/"
+Documentation = "https://github.com/toddwildey/sublime-text-plugin-pip"
+Issues = "https://github.com/toddwildey/sublime-text-plugin-pip/issues"
+Source = "https://github.com/toddwildey/sublime-text-plugin-pip"
+Donate = "https://github.com/sponsors/toddwildey"
 
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
-version = {attr = "authlib.__version__"}
+version = {attr = "sublime_text_plugin_pip.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["authlib", "authlib.*"]
+include = ["sublime_text_plugin_pip", "sublime_text_plugin_pip.*"]

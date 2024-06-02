@@ -5,15 +5,14 @@ permissions:
 
 on:
   push:
-    tags:
-      - "1.*"
+    branches: [ main ]
 
 env:
   FORCE_COLOR: '1'
 
 jobs:
   build:
-    name: build dist files
+    name: Build dist files
     runs-on: ubuntu-latest
 
     steps:
@@ -23,30 +22,51 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: install build
-      run: python -m pip install --upgrade build
+    - name: Install dependencies
+      run: python -m pip install -r requirements.txt
 
-    - name: build dist
+    - name: Build dist
       run: python -m build
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: artifacts
-        path: dist/*
+        path: |
+          dist
         if-no-files-found: error
 
-  publish:
-    environment:
-      name: pypi-release
-      url: https://pypi.org/project/Authlib/
-    permissions:
-      id-token: write
-    name: release to pypi
+  publish-to-pypi:
+    name: Release to PyPI
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: pypi-release
+      url: https://pypi.org/project/sublime-text-plugin-pip/
+    permissions:
+      id-token: write
 
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
+      with:
+        name: artifacts
+        path: dist
+
+    - name: Push build artifacts to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-to-testpypi:
+    name: Release to Test PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi-release
+      url: https://test.pypi.org/project/sublime-text-plugin-pip/
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/download-artifact@v4
       with:
         name: artifacts
         path: dist
@@ -54,5 +74,5 @@ jobs:
     - name: Push build artifacts to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        skip-existing: true
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        # skip-existing: true
+        repository-url: https://test.pypi.org/legacy/
